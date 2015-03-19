@@ -67,7 +67,10 @@
   "globals": {
     "$": false,
     "jQuery": false,
-    "_": false
+    "_": false,
+    "it": false,
+    "describe": false,
+    "expect": false
   },
   // Suppress warnings about == null comparisons.
   "eqnull": true
