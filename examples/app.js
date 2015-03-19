@@ -1,6 +1,4 @@
-;(function($) {
+;(function() {
   'use strict';
-  $(document).on('ready', function(){
-    console.log('ready');
-  });
-})(jQuery);
+  // put your samples here
+})();
