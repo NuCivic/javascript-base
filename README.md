@@ -60,6 +60,21 @@ grunt build
 grunt lint
 ```
 
+* Run tests
+``` bash
+./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
+```
+
+You could also install karma globally:
+```bash
+npm install -g karma-cli
+```
+
+An then use karma like this:
+``` bash
+karma start --single-run --browsers PhantomJS
+```
+
 Sublime Text Plugins
 -------------------------------------------------------------------------------
 
