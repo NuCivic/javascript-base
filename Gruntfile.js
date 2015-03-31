@@ -7,22 +7,23 @@ module.exports = function(grunt) {
       options: {
         separator: ';'
       },
-      dist: {
-        src: ['src/**/*.js'],
+      core: {
+        src: ['src/*.js'],
         dest: 'dist/<%= pkg.name %>.min.js'
-      }
+      },
     },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> v0.1 */\n'
       },
-      build: {
-        src: ['src/**/*.js'],
+      core: {
+        src: ['src/*.js'],
         dest: 'dist/<%= pkg.name %>.min.js'
+      },
+      controls: {
+        src: ['src/controls/*.js'],
+        dest: 'dist/<%= pkg.name %>.controls.min.js'
       }
-    },
-    livereload: {
-
     },
     express: {
       all: {
@@ -34,23 +35,22 @@ module.exports = function(grunt) {
         }
       }
     },
+    jshint: {
+      files: ['Gruntfile.js', 'src/**/*.js', 'examples/*.js' ],
+      options: {
+        jshintrc: true
+      }
+    },
     watch: {
-      all: {
-        files: '**/*.html',
-        options: {
-          livereload: true
-        }
+      files:  ['<%= jshint.files %>'],
+      tasks: ['jshint', 'concat', 'uglify'],
+      options: {
+        livereload: true
       }
     },
     open: {
       all: {
         path: 'http://localhost:8080/examples/index.html'
-      }
-    },
-    jshint: {
-      all: ['Gruntfile.js', 'src/**/*.js', 'examples/*.js' ],
-      options: {
-        jshintrc: true
       }
     }
   });
@@ -64,11 +64,8 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', [
     'express',
-    'jshint',
-    'concat',
-    'uglify',
     'open',
-    'watch'
+    'watch',
   ]);
 
   grunt.registerTask('build', [
