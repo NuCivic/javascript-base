@@ -38,6 +38,7 @@ module.exports = function(grunt) {
     jshint: {
       files: ['Gruntfile.js', 'src/**/*.js', 'examples/*.js' ],
       options: {
+        interval: 5007,
         jshintrc: true
       }
     },
