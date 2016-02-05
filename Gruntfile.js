@@ -3,26 +3,25 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    concat: {
-      options: {
-        separator: ';'
-      },
-      core: {
-        src: ['src/*.js'],
-        dest: 'dist/<%= pkg.name %>.min.js'
-      },
+    browserify: {
+      dist: {
+        files: {
+          './dist/app.bundle.js': ['./src/*.js'] 
+        },
+        options: {
+          transform: [
+            ['babelify', { 'presets' : 'es2015'}]
+          ]
+        }
+      }
     },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> v0.1 */\n'
       },
       core: {
-        src: ['src/*.js'],
+        src: ['dist/app.bundle.js'],
         dest: 'dist/<%= pkg.name %>.min.js'
-      },
-      controls: {
-        src: ['src/controls/*.js'],
-        dest: 'dist/<%= pkg.name %>.controls.min.js'
       }
     },
     express: {
@@ -44,7 +43,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files:  ['<%= jshint.files %>'],
-      tasks: ['jshint', 'concat', 'uglify'],
+      tasks: ['jshint', 'browserify', 'uglify'],
       options: {
         livereload: true
       }
@@ -62,6 +61,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-livereload');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-browserify');
   // Default task(s).
   grunt.registerTask('default', [
     'express',
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'jshint',
-    'concat',
+    'browserify',
     'uglify'
   ]);
 

@@ -1,5 +1,11 @@
 {
   /*
+   * NuCivic Javascript base 
+   */
+
+   // Use es6 
+   "esnext" : true,
+  /*
    * ENVIRONMENTS
    * =================
    */
