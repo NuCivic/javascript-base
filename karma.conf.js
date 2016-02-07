@@ -3,15 +3,13 @@ module.exports = function(config) {
   'use strict';
 
   config.set({
-    frameworks: ['mocha', 'expect'],
+    frameworks: ['mocha', 'chai', 'expect'],
     files: [
       // Put dependencies here.
-      'test/test.js'
+      'dist/**/*.js',
+      'test/**/*.js'
     ],
-    client: {
-      mocha: {
-        timeout: 5000
-      }
-    }
+    reporters: ['mocha'],
+    browsers: ['PhantomJS']
   });
-};
+}
